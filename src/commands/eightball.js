@@ -48,26 +48,18 @@ module.exports = {
                 .setRequired(true)
         ),
 
-    async execute(interaction) {
-        const question = interaction.options.getString('question');
-        const answer = responses[Math.floor(Math.random() * responses.length)];
+   async execute(interaction) {
+    const question = interaction.options.getString('question');
+    const answer = responses[Math.floor(Math.random() * responses.length)];
 
-        const embed = new EmbedBuilder()
-            .setColor(config.embedColor)
-            .setTitle('🎱 The Magic 8-Ball Speaks')
-            .addFields(
-                {
-                    name: '❓ Question',
-                    value: question
-                },
-                {
-                    name: '🎱 Answer',
-                    value: answer
-                }
-            )
-            .setFooter({ text: config.footer })
-            .setTimestamp();
+    const embed = new EmbedBuilder()
+        .setColor(config.embedColor)
+        .setTitle('Childe says...')
+        .setDescription(`*"${question}"*\n\n**${answer}**`)
+        .setFooter({ text: config.footer })
+        .setTimestamp();
 
-        await interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
+}
     }
 };
