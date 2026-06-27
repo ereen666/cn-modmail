@@ -50,7 +50,7 @@ module.exports = {
     setTimeout(() => {
       client.user.setPresence({
         activities: [{ 
-          name: 'Playing guitar to Cacucu',
+          name: 'Having a snow fight with Teucer',
           type: ActivityType.Playing
         }],
         status: 'online'
