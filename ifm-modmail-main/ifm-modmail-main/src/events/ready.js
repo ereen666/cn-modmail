@@ -13,7 +13,7 @@ module.exports = {
     // Set bot status - something clearer about DMing to create tickets
     client.user.setPresence({
       activities: [{ 
-        name: 'Playing guitar to Cacucu',
+        name: 'Having a snow fight with Teucer',
         type: ActivityType.Custom 
       }],
       status: 'online'
@@ -50,7 +50,7 @@ module.exports = {
     setTimeout(() => {
       client.user.setPresence({
         activities: [{ 
-          name: 'Playing guitar to Cacucu',
+          name: 'Having a snow fight with Teucer',
           type: ActivityType.Playing
         }],
         status: 'online'
