@@ -8,6 +8,8 @@
     "dev": "nodemon src/index.js",
     "deploy": "node src/deploy-commands.js",
     "lint": "eslint ."
+    logger.info(`Node version: ${process.version}`);
+logger.info(`discord.js version: ${require('discord.js').version}`);
   },
   "keywords": [
     "discord",
