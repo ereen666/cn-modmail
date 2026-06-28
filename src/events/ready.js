@@ -12,12 +12,14 @@ module.exports = {
     
     // Set bot status - something clearer about DMing to create tickets
     client.user.setPresence({
-      activities: [{ 
-        name: 'Having a snow fight with Teucer',
-        type: ActivityType.Custom 
-      }],
-      status: 'online'
-    });
+  activities: [
+    {
+      name: 'Having a snow fight with Teucer',
+      type: ActivityType.Playing
+    }
+  ],
+  status: 'online'
+});
 
     // Check for required environment variables
     const requiredEnvVars = [
@@ -49,12 +51,14 @@ module.exports = {
     // Set the status again after a short delay to ensure it sticks
     setTimeout(() => {
       client.user.setPresence({
-        activities: [{ 
-          name: 'Having a snow fight with Teucer',
-          type: ActivityType.Playing
-        }],
-        status: 'online'
-      });
+  activities: [
+    {
+      name: 'Having a snow fight with Teucer',
+      type: ActivityType.Playing
+    }
+  ],
+  status: 'online'
+});
     }, 10000);
   }
 }; 
