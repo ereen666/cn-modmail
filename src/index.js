@@ -242,3 +242,16 @@ client.login(process.env.TOKEN)
   .catch(error => {
     logger.error('Error logging in to Discord:', error);
   });
+const inspector = setInterval(() => {
+    logger.info("=== EVENT LOOP ALIVE ===");
+}, 5000);
+
+inspector.unref();
+setInterval(() => {
+    logger.info("Memory:", process.memoryUsage());
+}, 60000);
+setInterval(() => {
+    logger.info(
+        `Uptime: ${Math.floor(process.uptime())} seconds`
+    );
+}, 30000);
