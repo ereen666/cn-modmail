@@ -12,6 +12,11 @@ module.exports = {
     
     // Set bot status - something clearer about DMing to create tickets
     client.user.setPresence({
+      setInterval(() => {
+    logger.info(
+        `Presence: ${client.user?.presence?.status} | Ready: ${client.isReady()}`
+    );
+}, 15000);
   activities: [
     {
       name: 'Having a snow fight with Teucer',
