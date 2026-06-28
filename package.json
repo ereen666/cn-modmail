@@ -9,6 +9,9 @@
     "deploy": "node src/deploy-commands.js",
     "lint": "eslint ."
   },
+  "engines": {
+  "node": "20.x"
+},
   "keywords": [
     "discord",
     "bot",
