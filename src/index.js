@@ -14,9 +14,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Website routes
 app.get('/', (req, res) => {
-  res.render('index', { 
+  res.render('index', {
     title: 'ModMail Bot',
-    botStatus: client?.user?.presence?.status || 'offline'
+    botStatus: client.isReady() ? 'online' : 'offline'
+  });
+});
+
+// Debug status route
+app.get('/status', (req, res) => {
+  res.json({
+    ready: client.isReady(),
+    ping: client.ws.ping,
+    wsStatus: client.ws.status,
+    guilds: client.guilds.cache.size,
+    uptime: process.uptime()
   });
 });
 
@@ -69,6 +80,13 @@ client.on('error', error => {
 client.on('warn', warning => {
   logger.warn(warning);
 });
+
+// Heartbeat (every 30 seconds)
+setInterval(() => {
+  logger.info(
+    `Heartbeat | Ready: ${client.isReady()} | WS Status: ${client.ws.status} | Ping: ${client.ws.ping}ms`
+  );
+}, 30000);
 
 // Initialize collections for commands
 client.commands = new Collection();
