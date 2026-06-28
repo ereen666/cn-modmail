@@ -6,6 +6,7 @@ const SetupHandler = require('../utils/setup/setupHandler');
 module.exports = {
   name: 'interactionCreate',
   async execute(interaction, client) {
+     logger.info(`Interaction received: ${interaction.type} | ${interaction.commandName ?? interaction.customId}`);
     // Handle slash commands
     if (interaction.isChatInputCommand()) {
       const command = client.commands.get(interaction.commandName);
