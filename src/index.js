@@ -81,12 +81,33 @@ client.on('warn', warning => {
   logger.warn(warning);
 });
 
+client.on('debug', info => {
+    if (
+        info.includes('Heartbeat') ||
+        info.includes('Session') ||
+        info.includes('WebSocket')
+    ) {
+        logger.info(info);
+    }
+});
+
 // Heartbeat (every 30 seconds)
 setInterval(() => {
   logger.info(
     `Heartbeat | Ready: ${client.isReady()} | WS Status: ${client.ws.status} | Ping: ${client.ws.ping}ms`
   );
 }, 30000);
+
+setInterval(async () => {
+    try {
+        await client.application.fetch();
+
+        logger.info("Application fetch OK");
+    } catch (err) {
+        logger.error("Application fetch FAILED");
+        logger.error(err);
+    }
+}, 60000);
 
 // Initialize collections for commands
 client.commands = new Collection();
