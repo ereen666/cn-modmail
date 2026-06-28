@@ -9,37 +9,43 @@ module.exports = {
     // Log that the bot is online
     logger.info(`Ready! Logged in as ${client.user.tag}`);
     logger.info('ModMail bot created by Izzy | Coders Planet');
-    
-    // Set bot status - something clearer about DMing to create tickets
-    client.user.setPresence({
-      setInterval(() => {
-    logger.info(
-        `Presence: ${client.user?.presence?.status} | Ready: ${client.isReady()}`
-    );
-}, 15000);
-  activities: [
-    {
-      name: 'Having a snow fight with Teucer',
-      type: ActivityType.Playing
-    }
-  ],
-  status: 'online'
-});
 
-    // Check for required environment variables
+    // Set bot presence
+    client.user.setPresence({
+      activities: [
+        {
+          name: 'Having a snow fight with Teucer',
+          type: ActivityType.Playing
+        }
+      ],
+      status: 'online'
+    });
+
+    // Debug presence every 15 seconds
+    setInterval(() => {
+      logger.info(
+        `Presence: ${client.user?.presence?.status} | Ready: ${client.isReady()}`
+      );
+    }, 15000);
+
+    // Check required environment variables
     const requiredEnvVars = [
-      'TOKEN', 
-      'MONGODB_URI', 
+      'TOKEN',
+      'MONGODB_URI',
       'CLIENT_ID'
     ];
 
-    const missingEnvVars = requiredEnvVars.filter(varName => !process.env[varName]);
-    
+    const missingEnvVars = requiredEnvVars.filter(
+      varName => !process.env[varName]
+    );
+
     if (missingEnvVars.length > 0) {
-      logger.warn(`Missing required environment variables: ${missingEnvVars.join(', ')}`);
+      logger.warn(
+        `Missing required environment variables: ${missingEnvVars.join(', ')}`
+      );
     }
-    
-    // Display credit banner in console
+
+    // Display banner
     console.log(`
 ╔═══════════════════════════════════════════════════════════════╗
 ║                                                               ║
@@ -53,4 +59,4 @@ module.exports = {
 ╚═══════════════════════════════════════════════════════════════╝
     `);
   }
-}; 
+};
