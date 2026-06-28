@@ -41,6 +41,35 @@ const client = new Client({
   ]
 });
 
+// Discord connection logging
+client.on('shardDisconnect', (event, id) => {
+  logger.warn(`Shard ${id} disconnected. Close code: ${event.code}`);
+});
+
+client.on('shardError', (error, id) => {
+  logger.error(`Shard ${id} error:`, error);
+});
+
+client.on('shardReconnecting', id => {
+  logger.info(`Shard ${id} reconnecting...`);
+});
+
+client.on('shardResume', (id, replayedEvents) => {
+  logger.info(`Shard ${id} resumed (${replayedEvents} replayed events).`);
+});
+
+client.on('invalidated', () => {
+  logger.error('Discord session was invalidated!');
+});
+
+client.on('error', error => {
+  logger.error('Discord client error:', error);
+});
+
+client.on('warn', warning => {
+  logger.warn(warning);
+});
+
 // Initialize collections for commands
 client.commands = new Collection();
 client.cooldowns = new Collection();
@@ -102,6 +131,22 @@ mongoose.connect(process.env.MONGODB_URI)
 // Error handling
 process.on('unhandledRejection', error => {
   logger.error('Unhandled promise rejection:', error);
+});
+
+process.on('uncaughtException', error => {
+  logger.error('Uncaught exception:', error);
+});
+
+process.on('exit', code => {
+  logger.warn(`Process exited with code ${code}`);
+});
+
+process.on('SIGTERM', () => {
+  logger.warn('Received SIGTERM');
+});
+
+process.on('SIGINT', () => {
+  logger.warn('Received SIGINT');
 });
 
 // Login to Discord
