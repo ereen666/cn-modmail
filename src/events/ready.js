@@ -47,18 +47,5 @@ module.exports = {
 ║                                                               ║
 ╚═══════════════════════════════════════════════════════════════╝
     `);
-    
-    // Set the status again after a short delay to ensure it sticks
-    setTimeout(() => {
-      client.user.setPresence({
-  activities: [
-    {
-      name: 'Having a snow fight with Teucer',
-      type: ActivityType.Playing
-    }
-  ],
-  status: 'online'
-});
-    }, 10000);
   }
 }; 
